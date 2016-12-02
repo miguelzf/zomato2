@@ -20,7 +20,7 @@ Or install directly with:
 
 ## Usage
 
-```
+```Ruby
 require 'zomato2'
 
 zom_api_key = ENV['ZOMATO_API_KEY']
