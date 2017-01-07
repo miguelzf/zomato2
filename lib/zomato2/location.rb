@@ -4,14 +4,15 @@ module Zomato2
     attr_reader :address, :locality, :city_name, :latitude, :longitude, :zipcode, :country_id,  # basic attrs
                 :country_name, :city_id, :title, :entity_type, :entity_id      # detailed
 
+    # Zomato uses different names for the same field depending on the request..
     def initialize(zom_conn, attributes)
       super(zom_conn)
       @address      = attributes['address']
       @locality     = attributes['locality']
       @city_name    = attributes['city'] || attributes['city_name']
       @city_id      = attributes['city_id'] 
-      @latitude     = attributes['latitude']
-      @longitude    = attributes['longitude']
+      @latitude     = attributes['latitude']  || attributes['lat']
+      @longitude    = attributes['longitude'] || attributes['lon']
       @zipcode      = attributes['zipcode']
       @country_id   = attributes['country_id']
       @country_name = attributes['country_name']

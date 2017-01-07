@@ -6,7 +6,7 @@ module Zomato2
     def initialize(zom_conn, attributes)
       super(zom_conn)
       @id = attributes['id']
-      @name = attributes['category_name']
+      @name = attributes['name']
     end
 
     def to_s; super; end

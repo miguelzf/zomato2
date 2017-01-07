@@ -35,9 +35,30 @@ module Zomato2
       end
     end
 
-    def categories(params)
-      results = get('categories', params)
-      results['categories'].map { |e| Category.new(self, e['category']) }
+    def categories()
+      results = get('categories', {})
+      results['categories'].map { |e| Category.new(self, e['categories']) }
+    end
+
+    # search for locations
+    def locations(params={})
+      args = [ :query, :lat, :lon, :count ]
+      params.each do |k,v|
+        if !args.include?(k)
+          raise ArgumentError.new 'Search term not allowed: ' + k.to_s
+        end
+      end
+
+      if !params.include?(:query)
+        raise ArgumentError.new '"query" term with location name is required'
+      end
+
+      results = get('locations', params)
+      if results.key?("location_suggestions")
+        results["location_suggestions"].map { |l| Location.new(self, l) }
+      else
+        nil
+      end
     end
 
     # general search for restaurants

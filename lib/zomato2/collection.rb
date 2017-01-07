@@ -1,13 +1,14 @@
 module Zomato2
   class Collection < EntityBase
 
-    attr_reader :city_id, :id, :title, :city_id, :url, :description, :image_url, :res_count, :share_url
+    attr_reader :city_id, :id, :title, :url, :description, :image_url, :res_count, :share_url
 
     def initialize(zom_conn, cityid, attributes)
       super(zom_conn)
       @city_id = cityid
       @id  = attributes['collection_id']
       @url = attributes['url']
+      @title  = attributes['title']
       @description = attributes['description']
       @image_url = attributes['image_url']
       @res_count = attributes['res_count']
